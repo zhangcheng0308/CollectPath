@@ -44,8 +44,8 @@ public class MainActivity extends Activity {
 		
 		for (int i = 0; i < len; i++) {
 			PackageInfo pi = l.get(i);
-			if ((pi.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0 && 
-					((pi.applicationInfo.flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0)) {
+			if ((pi.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) == 0 && 
+					((pi.applicationInfo.flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) == 0)) {
 				pkgNames.add(pi.packageName);
 				System.out.println("zhangcheng*****************pkg " + pi.packageName);
 				mPkgAppMap.put(pi.packageName, (String) pi.applicationInfo.loadLabel(pm));	

@@ -144,21 +144,20 @@ public class MainActivity extends Activity {
 				int len = l.size();
 				
 				for (int i = 0; i < len; i++) {
-					String pkgName = l.get(i);
-					System.out.println("zhangcheng>>>>>>>>>>>>>pkgName " + pkgName);
-					Runtime.getRuntime().exec("monkey -p " + pkgName + " 1000");
 					try {
-						Thread.sleep(60000);
+						String pkgName = l.get(i);
+						System.out.println("zhangcheng>>>>>>>>>>>>>pkgName " + pkgName);
+						Process p = Runtime.getRuntime().exec("monkey -p " + pkgName + " 1000");
+						p.waitFor();
+						fw.write(pkgName);
+						fw.write("\n");
+						collectPath(fw, mRootFile);
+						fw.write("===================================================================");
+						cleanPhoneStorage(mRootFile);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					
-					fw.write(pkgName);
-					fw.write("\n");
-					collectPath(fw, mRootFile);
-					fw.write("===================================================================");
-					cleanPhoneStorage(mRootFile);
 				}
 				
 				writePkgAppMap(fw);

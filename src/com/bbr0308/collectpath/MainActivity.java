@@ -47,6 +47,7 @@ public class MainActivity extends Activity {
 			if ((pi.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0 && 
 					((pi.applicationInfo.flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0)) {
 				pkgNames.add(pi.packageName);
+				System.out.println("zhangcheng*****************pkg " + pi.packageName);
 				mPkgAppMap.put(pi.packageName, (String) pi.applicationInfo.loadLabel(pm));	
 			}
 		}
@@ -56,10 +57,11 @@ public class MainActivity extends Activity {
 	
 	void collectPath(FileWriter fw, File f) {
 		File[] fs = f.listFiles();
-		int len = fs.length;
 		
 		if (null != fs) {
 			try {
+				System.out.println("zhangcheng===============collectPath " + f.getAbsolutePath());
+				int len = fs.length;
 				for (int i = 0; i < len; i++) {
 					File tmp = fs[i];
 					if (tmp.isFile()) {
@@ -79,9 +81,10 @@ public class MainActivity extends Activity {
 	
 	void cleanPhoneStorage(File f) {
 		File[] fs = f.listFiles();
-		int len = fs.length;
 		
 		if (null != fs) {
+			System.out.println("zhangcheng===============cleanPhoneStorage " + f.getAbsolutePath());
+			int len = fs.length;
 			for (int i = 0; i < len; i++) {
 				File tmp = fs[i];
 				if (tmp.isFile()) {
@@ -142,9 +145,10 @@ public class MainActivity extends Activity {
 				
 				for (int i = 0; i < len; i++) {
 					String pkgName = l.get(i);
-					Runtime.getRuntime().exec("monkey -p " + pkgName + " --throttle 60000 10");
+					System.out.println("zhangcheng>>>>>>>>>>>>>pkgName " + pkgName);
+					Runtime.getRuntime().exec("monkey -p " + pkgName + " 1000");
 					try {
-						Thread.sleep(700000);
+						Thread.sleep(60000);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
